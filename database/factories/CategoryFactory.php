@@ -14,7 +14,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->realTextBetween($minNbChars = 5, $maxNbChars = 15, $indexSize = 1),
         ];
     }
 }
