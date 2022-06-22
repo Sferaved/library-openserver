@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\BookFilter;
+use App\Models\Author;
 use App\Models\Book;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -13,9 +17,13 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(BookFilter $request)
     {
-        //
+        $books = Book::filter($request)->Paginate(8);
+        $categories = Category::All();
+
+
+        return view('books', ['data' => $books, 'categories' => $categories]);
     }
 
     /**
@@ -36,7 +44,7 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        //
+
     }
 
     /**
@@ -47,7 +55,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+
     }
 
     /**
