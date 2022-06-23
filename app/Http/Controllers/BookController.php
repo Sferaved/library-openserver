@@ -8,7 +8,7 @@ use App\Models\Book;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Category;
-use Illuminate\Support\Facades\DB;
+
 
 class BookController extends Controller
 {
@@ -19,7 +19,7 @@ class BookController extends Controller
      */
     public function index(BookFilter $request)
     {
-        $books = Book::filter($request)->Paginate(8);
+        $books = Book::filter($request)->Paginate(5);
         $categories = Category::All();
         $authors = Author::all();
 

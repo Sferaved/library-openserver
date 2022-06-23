@@ -1,21 +1,24 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
 
-@section('title-block')
-    Books
-@endsection
-
-@section('content')
 
     <div class="container">
-        <div class="row col-12">
-            <h1>Books page</h1>
-        </div>
         <div class="row" style="margin-top: 10px">
             <div class="col-md-2">
-
+                <h2>Filter</h2>
                 <form action="{{route('books')}}" method="get">
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Search by name</label>
+                        <label for="exampleFormControlInput1" class="form-label">Search by name of Books</label>
                         <input name="search_field" @if(isset($_GET['search_field'])) value="{{$_GET['search_field']}}" @endif type="text" class="form-control" id="exampleFormControlInput1" placeholder="Type something">
                     </div>
                     <div class="mb-3">
@@ -36,8 +39,8 @@
                         <div class="form-label">Sort ASC by ...</div>
 
                         <select name="sort_asc" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                            <option value="{{$by = 'author_id'}}"  @if(isset($_GET['by'])) @if($_GET['by'] == 'author->id') selected @endif @endif>{{'Author ID'}}</option>
-                            <option value="{{$by = 'name'}}"  @if(isset($_GET['by'])) @if($_GET['by'] == 'name') selected @endif @endif>{{'Name'}}</option>
+                             <option value="{{$by = 'author_id'}}"  @if(isset($_GET['by'])) @if($_GET['by'] == 'author->id') selected @endif @endif>{{'Author ID'}}</option>
+                             <option value="{{$by = 'name'}}"  @if(isset($_GET['by'])) @if($_GET['by'] == 'name') selected @endif @endif>{{'Name'}}</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="location.reload();">Submit</button>
@@ -70,8 +73,9 @@
                 <div style="margin: 10px;"> {{$data->withQueryString()->links('vendor.pagination.bootstrap-4') }}</div>
             </div>
 
-        </div>
+       </div>
 
     </div>
-@endsection
 
+    </body>
+</html>
