@@ -18,7 +18,7 @@
                 <h2>Filter</h2>
                 <form action="{{route('books')}}" method="get">
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Search</label>
+                        <label for="exampleFormControlInput1" class="form-label">Search by name of Books</label>
                         <input name="search_field" @if(isset($_GET['search_field'])) value="{{$_GET['search_field']}}" @endif type="text" class="form-control" id="exampleFormControlInput1" placeholder="Type something">
                     </div>
                     <div class="mb-3">
@@ -28,6 +28,19 @@
                             @foreach($categories as $category)
                                 <option value="{{$category->id}}" @if(isset($_GET['category_id'])) @if($_GET['category_id'] == $category->id) selected @endif @endif>{{$category->name}}</option>
                             @endforeach
+                        </select>
+                        <div class="form-label">Choose author</div>
+                        <select name="author_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <option></option>
+                            @foreach($authors as $author)
+                                <option value="{{$author->id}}" @if(isset($_GET['author_id'])) @if($_GET['author_id'] == $author->id) selected @endif @endif>{{$author->name}}</option>
+                            @endforeach
+                        </select>
+                        <div class="form-label">Sort ASC by ...</div>
+
+                        <select name="sort_asc" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                             <option value="{{$by = 'author_id'}}"  @if(isset($_GET['by'])) @if($_GET['by'] == 'author->id') selected @endif @endif>{{'Author ID'}}</option>
+                             <option value="{{$by = 'name'}}"  @if(isset($_GET['by'])) @if($_GET['by'] == 'name') selected @endif @endif>{{'Name'}}</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="location.reload();">Submit</button>

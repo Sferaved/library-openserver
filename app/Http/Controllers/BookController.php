@@ -21,9 +21,9 @@ class BookController extends Controller
     {
         $books = Book::filter($request)->Paginate(8);
         $categories = Category::All();
+        $authors = Author::all();
 
-
-        return view('books', ['data' => $books, 'categories' => $categories]);
+        return view('books', ['data' => $books, 'categories' => $categories, 'authors' => $authors]);
     }
 
     /**
