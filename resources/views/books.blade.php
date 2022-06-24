@@ -38,6 +38,7 @@
                         <select name="sort_asc" class="form-select form-select-sm" aria-label=".form-select-sm example">
                             <option value="{{$by = 'author_id'}}"  @if(isset($_GET['by'])) @if($_GET['by'] == 'author->id') selected @endif @endif>{{'Author ID'}}</option>
                             <option value="{{$by = 'name'}}"  @if(isset($_GET['by'])) @if($_GET['by'] == 'name') selected @endif @endif>{{'Name'}}</option>
+                            <option value="{{$by = 'id'}}"  @if(isset($_GET['by'])) @if($_GET['by'] == 'id') selected @endif @endif>{{'#'}}</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="location.reload();">Submit</button>
