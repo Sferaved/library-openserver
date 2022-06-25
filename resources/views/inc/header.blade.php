@@ -6,9 +6,15 @@
 
     <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('welcome')}}">Home</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('books')}}">Books</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('user.login')}}">Login</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('user.logout')}}">Logout</a>
 
+        @if (!Auth::check())
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('user.login')}}">Login</a>
+        @endif
+
+        @if (Auth::check())
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('books')}}">Books</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('user.private')}}">Private</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('user.logout')}}">{{ auth()->user()->name}} (Logout)</a>
+        @endif
     </nav>
 </div>
