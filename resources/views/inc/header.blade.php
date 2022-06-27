@@ -5,10 +5,11 @@
     </a>
 
     <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('welcome')}}">Home</a>
 
         @if (!Auth::check())
             <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('user.login')}}">Login</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('user.registration')}}">Register</a>
+
         @endif
 
         @if (Auth::check())
