@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -42,7 +43,7 @@ class ForgotPasswordController extends Controller
             'created_at' => Carbon::now()
         ]);
 
-         Mail::send('email.forgetPassword', ['token' => $token], function($message) use($request){
+        Mail::send('email.forgetPassword', ['token' => $token], function ($message) use ($request) {
             $message->to($request->email);
             $message->subject('Reset Password');
         });
@@ -85,7 +86,10 @@ class ForgotPasswordController extends Controller
         $user = User::where('email', $request->email)
             ->update(['password' => Hash::make($request->password)]);
 
-        DB::table('password_resets')->where(['email'=> $request->email])->delete();
+        DB::table('password_resets')->where(['email' => $request->email])->delete();
+
+        $user = User::where('email', '=', $request->email)->first();
+        event(new PasswordReset($user));
 
         return redirect('auth/login')->with('success', 'Your password has been changed!');
     }

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\PasswordReset;
+use App\Listeners\PasswordResetMail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -21,6 +23,10 @@ class EventServiceProvider extends ServiceProvider
 
         Verified::class => [
             'App\Listeners\LogVerifiedUser',
+        ],
+
+        PasswordReset::class => [
+            PasswordResetMail::class,
         ],
 
     ];
