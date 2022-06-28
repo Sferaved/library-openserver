@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -46,8 +47,25 @@ Route::name('user.')->group(function () {
         }
         return view('registration');
     })->name('registration');
+
     Route::post('/registration', [RegisterController::class, 'save']);
 
+    Route::get('/users', [UserController::class, 'index'])->name('users');
+
+    Route::get('/users/create', function () {
+         return view('usr.create');
+    })->name('create');
+
+    Route::post('/users/create', [UserController::class, 'create']);
+
+    Route::get('/users/all/{id}/update', [UserController::class, 'update'])
+        ->name('update');
+
+    Route::post('/users/all/{id}/update', [UserController::class, 'updateSubmit'])
+        ->name('update-submit');
+
+    Route::get('/users/all/{id}/destroy', [UserController::class, 'destroy'])
+        ->name('destroy');
 
 });
 

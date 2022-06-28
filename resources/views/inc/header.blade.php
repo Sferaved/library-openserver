@@ -14,6 +14,7 @@
 
         @if (Auth::check())
             <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('books')}}">Books</a>
+                <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('user.users')}}">Users</a>
             <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('user.private')}}">Private</a>
             <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('user.logout')}}">{{ auth()->user()->name}} (Logout)</a>
         @endif
