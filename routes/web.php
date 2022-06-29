@@ -50,7 +50,8 @@ Route::name('user.')->group(function () {
 
     Route::post('/registration', [RegisterController::class, 'save']);
 
-    Route::get('/users', [UserController::class, 'index'])->name('users');
+    Route::get('/users', [UserController::class, 'index'])->middleware('role:superadministrator')
+        ->name('users');
 
     Route::get('/users/create', function () {
          return view('usr.create');
@@ -66,7 +67,6 @@ Route::name('user.')->group(function () {
 
     Route::get('/users/all/{id}/destroy', [UserController::class, 'destroy'])
         ->name('destroy');
-
 });
 
 Route::get('/email/verify', function () {

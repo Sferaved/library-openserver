@@ -14,7 +14,10 @@
 
         @if (Auth::check())
             <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('books')}}">Books</a>
-                <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('user.users')}}">Users</a>
+                @if(Auth::user()->hasRole('superadministrator'))
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('user.users')}}">Users</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="http://library/laratrust">Laratrust</a>
+                @endif
             <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('user.private')}}">Private</a>
             <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('user.logout')}}">{{ auth()->user()->name}} (Logout)</a>
         @endif
