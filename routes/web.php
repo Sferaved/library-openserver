@@ -55,17 +55,21 @@ Route::name('user.')->group(function () {
 
     Route::get('/users/create', function () {
          return view('usr.create');
-    })->name('create');
+    })->middleware('role:superadministrator')->name('create');
 
-    Route::post('/users/create', [UserController::class, 'create']);
+    Route::post('/users/create', [UserController::class, 'create'])
+        ->middleware('role:superadministrator');
 
     Route::get('/users/all/{id}/update', [UserController::class, 'update'])
+        ->middleware('role:superadministrator')
         ->name('update');
 
     Route::post('/users/all/{id}/update', [UserController::class, 'updateSubmit'])
+        ->middleware('role:superadministrator')
         ->name('update-submit');
 
     Route::get('/users/all/{id}/destroy', [UserController::class, 'destroy'])
+        ->middleware('role:superadministrator')
         ->name('destroy');
 });
 
