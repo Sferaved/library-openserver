@@ -54,7 +54,7 @@
                                  <td>{{$value->email}} </td>
                                  <td>{{$value->created_at}} </td>
                                  <td> <a href="{{ route('user.update', $value->id) }}"><button class="btn btn-info">Upd</button></a>
-                                     <a href="{{ route('user.destroy', $value->id) }}"><button class="btn btn-danger">Del</button></a>
+                                      <a href="{{ route('user.destroy', $value->id) }}"><button class="btn btn-danger">Del</button></a>
                                  </td>
                              </tr>
                          @endforeach

@@ -18,7 +18,7 @@ class BookFactory extends Factory
             'name' => $this->faker->realTextBetween($minNbChars = 10, $maxNbChars = 20, $indexSize = 2),
             'author_id' => random_int(1, 15),
             'description' => $this->faker->realTextBetween($minNbChars = 160, $maxNbChars = 200, $indexSize = 2),
-            'cover' => 'images/book.jpeg',
+            'cover' => 'images/books/book.jpg',
             'category_id' => random_int(1, 4),
         ];
     }

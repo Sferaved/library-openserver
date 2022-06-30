@@ -13,7 +13,7 @@
         @endif
 
         @if (Auth::check())
-            <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('books')}}">Books</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('book.books')}}">Books</a>
                 @if(Auth::user()->hasRole('superadministrator'))
                     <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('user.users')}}">Users</a>
                     <a class="me-3 py-2 text-dark text-decoration-none" href="http://library/laratrust">Laratrust</a>

@@ -98,4 +98,27 @@ Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showRese
 Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])
     ->name('reset.password.post');
 
-Route::get('/books', [BookController::class, 'index'])->middleware('verified')->name('books');
+
+Route::name('book.')->group(function () {
+
+    Route::get('/books', [BookController::class, 'index'])->middleware('verified')->name('books');
+
+   Route::get('/books/create', function () {
+        return view('book.create');
+    })->middleware('role:superadministrator')->name('create');
+
+   Route::post('/books/create', [BookController::class, 'create'])
+        ->middleware('role:superadministrator');
+
+     Route::get('/books/{id}/update', [BookController::class, 'show'])
+        ->middleware('role:superadministrator')
+        ->name('show');
+
+    Route::post('/books/{id}/update', [BookController::class, 'update'])
+        ->middleware('role:superadministrator')
+        ->name('update');
+
+     Route::get('/books/{id}/destroy', [BookController::class, 'destroy'])
+        ->middleware('role:superadministrator')
+        ->name('destroy');
+});

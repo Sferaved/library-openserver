@@ -8,7 +8,10 @@ use App\Models\Book;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Category;
-
+use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -23,7 +26,7 @@ class BookController extends Controller
         $categories = Category::All();
         $authors = Author::all();
 
-        return view('books', ['data' => $books, 'categories' => $categories, 'authors' => $authors]);
+        return view('book.books', ['data' => $books, 'categories' => $categories, 'authors' => $authors]);
     }
 
     /**
@@ -31,9 +34,43 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(StoreBookRequest $request)
     {
-        //
+
+        $book = new Book();
+        $book->name =  $request->input('name');
+        $book->category_id = $request->input('category_id');
+        $book->author_id = $request->input('author_id');
+        $book->description = $request->input('description');
+        $book->created_at = now();
+        $book->description = $request->input('description');
+
+
+        if ($request->hasFile('cover')) {
+            $destinationPath = 'images/books/';
+            $fileName = $book->name . '.jpg';
+
+            $request->file('cover')->move($destinationPath, $fileName);
+
+            $book->cover  = $destinationPath . $fileName;
+
+        }
+
+        $book->save();
+
+
+        if ($book) {
+            return redirect(route('book.books'));
+        };
+   /*     if ($user) {
+            event(new Registered($user));
+            Auth::login($user);
+            return redirect(route('verification.notice'));
+        }
+
+        return redirect(route('user.login'))->withErrors([
+            'formError' => 'Error save user'
+        ]);*/
     }
 
     /**
@@ -53,8 +90,9 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show($id)
     {
+        return view('book.update', ['data' => Book::find($id), 'id' => $id]);
 
     }
 
@@ -76,9 +114,37 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBookRequest $request, Book $book)
+    public function update($id, UpdateBookRequest $request)
     {
-        //
+        $book = Book::find($id);
+        $coverOld = $book->cover;
+
+        $book->name =  $request->input('name');
+        $book->category_id = $request->input('category_id');
+        $book->author_id = $request->input('author_id');
+        $book->description = $request->input('description');
+        $book->updated_at = now();
+        $book->description = $request->input('description');
+
+
+        if ($request->hasFile('cover')) {
+            $destinationPath = 'images/books/';
+            $fileName = $book->name . '.jpg';
+
+            $request->file('cover')->move($destinationPath, $fileName);
+
+            $book->cover  = $destinationPath . $fileName;
+
+        } else {
+            $book->cover  = $coverOld;
+        };
+
+        $book->save();
+
+
+        if ($book) {
+            return redirect(route('book.books'))->with('success', 'The book is updated successfully');;
+        };
     }
 
     /**
@@ -87,8 +153,9 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy($id)
     {
-        //
+        DB::table('books')->where('id', $id)->delete();
+        return redirect(route('book.books'))->with('success', 'The book is deleted successfully');;
     }
 }
