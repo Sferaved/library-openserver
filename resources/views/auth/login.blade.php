@@ -64,6 +64,14 @@
                                         Login
                                     </button>
                                 </div>
+                                <div class="flex items-center justify-end mt-4">
+                                    <a href="{{ url('auth/google') }}">
+                                    <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
+                                    </a>
+                                    <a class="ml-1 btn btn-primary" href="{{ url('auth/facebook') }}" style="margin-top: 0px !important;background: blue;color: #ffffff;padding: 5px;border-radius:7px;" id="btn-fblogin">
+                                        <i class="fa fa-facebook-square" aria-hidden="true"></i> Login with Facebook
+                                    </a>
+                                </div>
                             </form>
 
                         </div>
@@ -72,39 +80,4 @@
             </div>
         </div>
     </main>
- <!--   <div class="container">
-        <div class="row">
-            <form role="form" action="{{route('user.login')}}" class="form-horizontal" method="post">
-                @csrf
-                <div class="form-grope">
-                    <label for="email" class="control-label col-md-2">Email</label>
-                    <div class="col-md-10">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="andrey18051@gmail.com" ><br>
-
-                    </div>
-                </div>
-                <div class="form-grope">
-                    <label for="password" class="control-label col-md-2" >Password</label>
-                    <div class="col-md-10">
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" ><br>
-
-                    </div>
-                </div>
-                <div class="form-grope">
-                    <a href="{{route('forget.password.get')}}">Forgot password? Password reset</a>
-                </div>
-
-                <div class="form-grope" style="margin-top: 10px">
-                    <div class="col-md-10 col-md-offset-2">
-                        <button type="submit" class="btn btn-info">Submit</button>
-                        <button  type="reset"  class="btn btn-danger" >
-                            Reset
-                        </button>
-                        <a class="btn btn-primary" href="{{route('user.registration')}}">Register now</a>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div> -->
-@endsection
-
+ @endsection

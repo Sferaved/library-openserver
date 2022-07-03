@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\FacebookController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
@@ -121,4 +123,13 @@ Route::name('book.')->group(function () {
      Route::get('/books/{id}/destroy', [BookController::class, 'destroy'])
         ->middleware('role:superadministrator')
         ->name('destroy');
+});
+
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
+
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
+Route::controller(FacebookController::class)->group(function(){
+    Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
+    Route::get('auth/facebook/callback', 'handleFacebookCallback');
 });

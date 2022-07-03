@@ -7,15 +7,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Filters\QueryFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Laratrust\Traits\LaratrustUserTrait;
 
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use LaratrustUserTrait;
     use HasApiTokens, HasFactory, Notifiable;
+    use TwoFactorAuthenticatable;
 
     /**
      * The attributes that are mass assignable.
@@ -26,6 +29,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'google_id',
+        'facebook_id'
     ];
 
     /**
@@ -36,6 +41,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
+        'two_factor_recovery_codes',
+        'two_factor_secret',
     ];
 
     /**
@@ -46,6 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 
     public function setPasswordAttribute($password)
     {
