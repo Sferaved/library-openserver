@@ -158,4 +158,7 @@ class BookController extends Controller
         DB::table('books')->where('id', $id)->delete();
         return redirect(route('book.books'))->with('success', 'The book is deleted successfully');;
     }
+
+
+
 }
