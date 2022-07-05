@@ -8,9 +8,6 @@ use App\Models\Book;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Category;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
@@ -36,16 +33,11 @@ class BookController extends Controller
      */
     public function create(StoreBookRequest $request)
     {
-
         $book = new Book();
         $book->name =  $request->input('name');
         $book->category_id = $request->input('category_id');
         $book->author_id = $request->input('author_id');
         $book->description = $request->input('description');
-        $book->created_at = now();
-        $book->description = $request->input('description');
-
-
         if ($request->hasFile('cover')) {
             $destinationPath = 'images/books/';
             $fileName = $book->name . '.jpg';
@@ -55,22 +47,10 @@ class BookController extends Controller
             $book->cover  = $destinationPath . $fileName;
 
         }
-
         $book->save();
-
-
         if ($book) {
             return redirect(route('book.books'));
         };
-   /*     if ($user) {
-            event(new Registered($user));
-            Auth::login($user);
-            return redirect(route('verification.notice'));
-        }
-
-        return redirect(route('user.login'))->withErrors([
-            'formError' => 'Error save user'
-        ]);*/
     }
 
     /**

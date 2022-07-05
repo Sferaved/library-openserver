@@ -39,6 +39,156 @@
                 "responses": {
                     "200": {
                         "description": "Everything is fine"
+                    },
+                    "404": {
+                        "description": "Example not found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Books Creat"
+                ],
+                "summary": "Create yet another book record",
+                "operationId": "bookCreate",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreBookRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StoreBookRequest"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/books/{id}": {
+            "get": {
+                "tags": [
+                    "Books Find by id"
+                ],
+                "summary": "Get book by ID",
+                "operationId": "booksGet",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StoreBookRequest"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Books Update"
+                ],
+                "summary": "Update book by ID",
+                "operationId": "booksUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of example",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreBookRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StoreBookRequest"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Books Destroy"
+                ],
+                "summary": "Delete book by ID",
+                "operationId": "booksDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of example",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Deleted"
                     }
                 },
                 "security": [
@@ -50,6 +200,58 @@
         }
     },
     "components": {
+        "schemas": {
+            "FindBookRequest": {
+                "title": "Book finding request",
+                "description": "Some simple request createa as example",
+                "properties": {
+                    "id": {
+                        "title": "Id",
+                        "description": "Id for finding",
+                        "type": "integer",
+                        "example": "1"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreBookRequest": {
+                "title": "Book storing request",
+                "description": "Some simple request createa as example",
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "description": "Name of key for storring",
+                        "type": "string",
+                        "example": "random"
+                    },
+                    "author_id": {
+                        "title": "Author_id",
+                        "description": "Author_id for storring",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "description": {
+                        "title": "Description",
+                        "description": "Value for storring",
+                        "type": "string",
+                        "example": "awesome"
+                    },
+                    "cover": {
+                        "title": "Cover",
+                        "description": "Cover for storring",
+                        "type": "string",
+                        "example": "images/books/My new book.jpg"
+                    },
+                    "category_id": {
+                        "title": "Category_id",
+                        "description": "Author_id for storring",
+                        "type": "integer",
+                        "example": "1"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "securitySchemes": {
             "X-APP-ID": {
                 "type": "apiKey",
