@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-
     <div class="container-fluid">
+
          <div class="row" style="margin-top: 10px">
             <div class="col-md-2">
 
@@ -79,6 +79,6 @@
 
         </div>
 
-    </div>
+ </div>
 @endsection
 

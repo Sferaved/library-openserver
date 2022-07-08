@@ -7,6 +7,7 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Vue\BookVueController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -105,6 +106,11 @@ Route::name('book.')->group(function () {
 
     Route::get('/books', [BookController::class, 'index'])->middleware('verified')->name('books');
 
+    Route::get('/booksv', function () {
+        return view('book.booksv');
+
+    })->middleware('verified')->name('bv');
+
    Route::get('/books/create', function () {
         return view('book.create');
     })->middleware('role:superadministrator')->name('create');
@@ -133,3 +139,9 @@ Route::controller(FacebookController::class)->group(function(){
     Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
     Route::get('auth/facebook/callback', 'handleFacebookCallback');
 });
+
+
+
+
+
+Route::get('/vue/books/all', [BookVueController::class, 'index']);

@@ -5,7 +5,7 @@ namespace App\Virtual;
 /**
  * @OA\Schema(
  *     type="object",
- *     title="Book finding request",
+ *     title="Library finding request",
  *     description="Some simple request createa as example",
  * )
  */
