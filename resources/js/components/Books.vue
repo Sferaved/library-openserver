@@ -6,21 +6,39 @@
             </create>
 
             <form action="#" method="get">
-            <search>
-            </search>
+                <search>
+                </search>
+                <div class="mb-3">
+                    <div class="form-label">Choose category</div>
+                    <select name="category_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option></option>
+                        <category v-for="category in categories"
+                                  :id="category.id"
+                                  :name="category.name"
+                                  :key="category.id">
+                        </category>
+                    </select>
+                    <div class="form-label">Sort ASC by ...</div>
 
-            <sorting>
-            </sorting>
+                    <select name="sort_asc" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option></option>
+                        <option value="author_id">Author_id</option>
+                        <option value="name">Name</option>
+                        <option value="#">#</option>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+                    </select>
+
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
         <div class="col-md-10 ">
              <book  class="card-body"
                     v-for="book in books"
                     :id="book.id"
                     :name="book.name"
-                    :description="book.description">
+                    :description="book.description"
+                    :key="book.id">
              </book>
         </div>
     </div>
@@ -31,21 +49,24 @@ import axios from 'axios';
 import Book from "../components/Library/Book";
 import Create from "../components/Library/Create";
 import Search from "../components/Library/Search";
-import Sorting from "../components/Library/Sorting";
+import Category from "../components/Library/Category";
+
 export default {
     name: "Books",
     components: {
         Book,
         Create,
         Search,
-        Sorting
+        Category
     },
     data: () => ({
         loading: true,
-        books: []
+        books: [],
+        categories: []
     }),
     mounted() {
-      this.loadBooks()
+      this.loadBooks(),
+      this.loadCategories()
     },
     methods: {
         loadBooks() {
@@ -56,6 +77,15 @@ export default {
                     this.loading = false;
                 }
             )
+        },
+        loadCategories() {
+            axios.get('/vue/categories/all')
+                .then(
+                    res => {
+                        this.categories = res.data;
+                        this.loading = false;
+                    }
+                )
         }
     }
 

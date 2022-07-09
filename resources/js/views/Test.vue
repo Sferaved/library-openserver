@@ -1,10 +1,10 @@
 <template>
-    <book-component></book-component>
+<h1>Test page</h1>
 </template>
 
 <script>
 export default {
-    name: "Index"
+    name: "Test"
 }
 </script>
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Vue\BookVueController;
+use App\Http\Controllers\Vue\CategoryVueController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -106,16 +107,14 @@ Route::name('book.')->group(function () {
 
     Route::get('/books', [BookController::class, 'index'])->middleware('verified')->name('books');
 
-    Route::get('/booksv', function () {
-        return view('book.booksv');
 
-    })->middleware('verified')->name('bv');
 
-   Route::get('/books/create', function () {
+
+    Route::get('/books/create', function () {
         return view('book.create');
     })->middleware('role:superadministrator')->name('create');
 
-   Route::post('/books/create', [BookController::class, 'create'])
+    Route::post('/books/create', [BookController::class, 'create'])
         ->middleware('role:superadministrator');
 
      Route::get('/books/{id}/update', [BookController::class, 'show'])
@@ -135,7 +134,7 @@ Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
-Route::controller(FacebookController::class)->group(function(){
+Route::controller(FacebookController::class)->group(function () {
     Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
     Route::get('auth/facebook/callback', 'handleFacebookCallback');
 });
@@ -145,3 +144,13 @@ Route::controller(FacebookController::class)->group(function(){
 
 
 Route::get('/vue/books/all', [BookVueController::class, 'index']);
+Route::get('/vue/categories/all', [CategoryVueController::class, 'index']);
+
+
+Route::get('/booksv', function () {
+    return view('book.booksv');
+})->name('bv');
+
+Route::get('/booksv/{any}', function () {
+    return view('book.booksv');
+})->where('any', '.*');

@@ -5,8 +5,9 @@
 @endsection
 
 @section('content')
+
 <div id="app">
-    <book-component></book-component>
+    <router-view></router-view>
 </div>
 <script src="./js/app.js"></script>
 @endsection
