@@ -12,7 +12,7 @@ const  routes = [
         component: Index
     },
     {
-        path: "/booksv/test1",
+        path: "/booksv/test",
         component: Test
     }
     ];
