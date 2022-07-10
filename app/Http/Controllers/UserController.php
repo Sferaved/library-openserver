@@ -138,9 +138,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-
-        DB::table('users')->where('id', $id)->delete();
-
+         User::where('id', $id)->delete();
      //   UserDestroy::dispatch($id, $user_name, $contactsCount);
 
         return redirect()->route('user.users')->with('success', 'The user is deleted successfully');

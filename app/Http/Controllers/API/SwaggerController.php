@@ -115,7 +115,7 @@ class SwaggerController
      *     @OA\Response(
      *         response="200",
      *         description="Everything is fine",
-     *         @OA\JsonContent(ref="#/components/schemas/StoreBookRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/FindBookRequest")
      *     ),
      * )
      *

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
 use Exception;
 use App\Models\User;
@@ -46,7 +47,8 @@ class FacebookController extends Controller
             }
 
         } catch (Exception $e) {
-            dd($e->getMessage());
+            Log::error($e);
+            return redirect(route('welcome'));
         }
     }
 }

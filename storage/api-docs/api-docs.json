@@ -110,7 +110,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/StoreBookRequest"
+                                    "$ref": "#/components/schemas/FindBookRequest"
                                 }
                             }
                         }
@@ -202,7 +202,7 @@
     "components": {
         "schemas": {
             "FindBookRequest": {
-                "title": "Book finding request",
+                "title": "Library finding request",
                 "description": "Some simple request createa as example",
                 "properties": {
                     "id": {
@@ -215,7 +215,7 @@
                 "type": "object"
             },
             "StoreBookRequest": {
-                "title": "Book storing request",
+                "title": "Library storing request",
                 "description": "Some simple request createa as example",
                 "properties": {
                     "name": {
