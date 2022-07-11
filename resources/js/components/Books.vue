@@ -1,13 +1,16 @@
 <template>
 
     <div class="row" style="margin-top: 10px">
-        <div class="col-md-2">
-            <create>
-            </create>
 
-            <form action="#" method="get">
-                <search>
-                </search>
+
+
+        <div class="col-md-2">
+
+            <div class="mb-3">
+                <label for="search" class="form-label">Search by name</label>
+                <input v-model="search" class="form-control" id="search" placeholder="Type something">
+            </div>
+
                 <div class="mb-3">
                     <div class="form-label">Choose category</div>
                     <select name="category_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
@@ -29,8 +32,8 @@
                     </select>
 
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                <button @click="searchBooks" type="submit" class="btn btn-primary">Submit</button>
+
         </div>
         <div class="col-md-10 ">
              <book  class="card-body"
@@ -62,15 +65,25 @@ export default {
     data: () => ({
         loading: true,
         books: [],
-        categories: []
+        categories: [],
+        search: ''
     }),
     mounted() {
-      this.loadBooks(),
-      this.loadCategories()
+        this.loadBooks(),
+        this.loadCategories()
     },
     methods: {
         loadBooks() {
-            axios.get('/vue/books/all')
+            axios.get('/vue/books/all' )
+                .then(
+                    res => {
+                        this.books = res.data;
+                        this.loading = false;
+                    }
+                )
+        },
+        searchBooks() {
+            axios.get('/vue/books/'+ this.search )
             .then(
                 res => {
                     this.books = res.data;

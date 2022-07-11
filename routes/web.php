@@ -154,3 +154,6 @@ Route::get('/booksv', function () {
 Route::get('/booksv/{any}', function () {
     return view('book.booksv');
 })->where('any', '.*');
+
+Route::get('/vue/books/all', [BookVueController::class, 'index']);
+Route::get('/vue/books/{search_string}', [BookVueController::class, 'show']);
