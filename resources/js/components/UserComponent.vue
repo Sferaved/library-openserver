@@ -1,9 +1,9 @@
 <template>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Laravel Vue Datatables Component Example - ItSolutionStuff.com</div>
+                    <div class="card-header">Users</div>
 
                     <div class="card-body">
                         <datatable :columns="columns" :data="rows"></datatable>
@@ -30,11 +30,12 @@ export default {
             columns: [
                 {label: 'id', field: 'id'},
                 {label: 'Name', field: 'name'},
-                {label: 'Email', field: 'email'}
+                {label: 'Email', field: 'email'},
+                {label: 'Created_at', field: 'created_at'}
             ],
             rows: [],
             page: 1,
-            per_page: 10,
+            per_page: 5,
         }
     },
     methods:{

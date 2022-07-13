@@ -20,6 +20,7 @@ class BookVueController extends Controller
 
     public function show($search_string)
     {
+
         $books = Book::where('name', 'LIKE', '%' . $search_string . '%')->orderBy('id', 'asc')->get();
         return response()->json($books);
     }

@@ -69,12 +69,12 @@ export default {
         search: ''
     }),
     mounted() {
-        this.loadBooks(),
+        this.getBooks(),
         this.loadCategories()
     },
     methods: {
-        loadBooks() {
-            axios.get('/vue/books/all' )
+        getBooks() {
+            axios.get('/vue/books/all')
                 .then(
                     res => {
                         this.books = res.data;

@@ -9,6 +9,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Vue\BookVueController;
 use App\Http\Controllers\Vue\CategoryVueController;
+use App\Http\Controllers\Vue\UserVueController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -157,3 +158,9 @@ Route::get('/booksv/{any}', function () {
 
 Route::get('/vue/books/all', [BookVueController::class, 'index']);
 Route::get('/vue/books/{search_string}', [BookVueController::class, 'show']);
+
+Route::get('/usersv', function () {
+    return view('usr.usersv');
+})->name('uv');
+
+Route::get('/vue/users/all', [UserVueController::class, 'index']);

@@ -16,6 +16,7 @@
                 <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('bv')}}">BooksVue</a>
                 <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('book.books')}}">Books</a>
                 <a class="me-3 py-2 text-dark text-decoration-none" href="http://library/laratrust">Laratrust</a>
+                <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('uv')}}">UsersVue</a>
                 @if(Auth::user()->hasRole('superadministrator'))
                     <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('user.users')}}">Users</a>
                    <a class="me-3 py-2 text-dark text-decoration-none" href="http://library/api/documentation">Swagger</a>
