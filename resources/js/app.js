@@ -32,7 +32,8 @@ Vue.component('privat-component', require('./components/Privat.vue').default);
  */
 
 import router from "./router";
-
+import SmartTable from 'vuejs-smart-table';
+Vue.use(SmartTable);
 
 const app = new Vue({
     el: '#app',

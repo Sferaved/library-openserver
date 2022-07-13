@@ -12,4 +12,13 @@ class UserVueController
     {
         return response()->json(User::get());
     }
+
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        $userDelete = $user->name;
+        $user->delete();
+        $userInfo = "User $userDelete was deleted!";
+        return response()->json($userInfo);
+    }
 }

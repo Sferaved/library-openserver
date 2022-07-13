@@ -164,3 +164,4 @@ Route::get('/usersv', function () {
 })->name('uv');
 
 Route::get('/vue/users/all', [UserVueController::class, 'index']);
+Route::get('/vue/users/delete/{id}', [UserVueController::class, 'destroy']);
