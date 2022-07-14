@@ -14,6 +14,14 @@ const  routes = [
     {
         path: "/booksv/test",
         component: Test
+    },
+    {
+        name: 'update',
+        path: '/vue/users/:id'
+    },
+    {
+        name: 'updateBook',
+        path: '/vue/books/:id'
     }
     ];
 

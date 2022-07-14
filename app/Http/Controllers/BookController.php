@@ -19,6 +19,7 @@ class BookController extends Controller
      */
     public function index(BookFilter $request)
     {
+     //   dd($request);
         $books = Book::filter($request)->Paginate(5);
         $categories = Category::All();
         $authors = Author::all();
@@ -123,7 +124,7 @@ class BookController extends Controller
 
 
         if ($book) {
-            return redirect(route('book.books'))->with('success', 'The book is updated successfully');;
+            return redirect(route('book.books'))->with('success', 'The book is updated successfully');
         };
     }
 
@@ -136,7 +137,7 @@ class BookController extends Controller
     public function destroy($id)
     {
         DB::table('books')->where('id', $id)->delete();
-        return redirect(route('book.books'))->with('success', 'The book is deleted successfully');;
+        return redirect(route('book.books'))->with('success', 'The book is deleted successfully');
     }
 
 

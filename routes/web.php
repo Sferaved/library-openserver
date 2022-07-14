@@ -9,6 +9,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Vue\BookVueController;
 use App\Http\Controllers\Vue\CategoryVueController;
+use App\Http\Controllers\Vue\UserVueController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -117,7 +118,7 @@ Route::name('book.')->group(function () {
     Route::post('/books/create', [BookController::class, 'create'])
         ->middleware('role:superadministrator');
 
-     Route::get('/books/{id}/update', [BookController::class, 'show'])
+    Route::get('/books/{id}/update', [BookController::class, 'show'])
         ->middleware('role:superadministrator')
         ->name('show');
 
@@ -150,7 +151,28 @@ Route::get('/vue/categories/all', [CategoryVueController::class, 'index']);
 Route::get('/booksv', function () {
     return view('book.booksv');
 })->name('bv');
+Route::get('/vue/books/delete/{id}', [BookVueController::class, 'destroy']);
+Route::get('/vue/books/{id}', [BookVueController::class, 'update'])->name('update-submit-bv');
+Route::post('/vue/books/{id}', [BookVueController::class, 'updateSubmit'])
+    ->middleware('role:superadministrator')
+    ->name('update-submit-bv');
+
+
+
 
 Route::get('/booksv/{any}', function () {
     return view('book.booksv');
 })->where('any', '.*');
+
+Route::get('/vue/books/all', [BookVueController::class, 'index']);
+
+Route::get('/usersv', function () {
+    return view('usr.usersv');
+})->name('uv');
+
+Route::get('/vue/users/all', [UserVueController::class, 'index'])->name('usersv');
+Route::get('/vue/users/delete/{id}', [UserVueController::class, 'destroy']);
+Route::get('/vue/users/{id}', [UserVueController::class, 'update'])->name('update-submit-v');
+Route::post('/vue/users/{id}', [UserVueController::class, 'updateSubmit'])
+    ->middleware('role:superadministrator')
+    ->name('update-submit-v');
