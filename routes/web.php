@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\SwaggerController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\FacebookController;

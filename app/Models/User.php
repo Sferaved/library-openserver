@@ -8,16 +8,18 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Sanctum\HasApiTokens;
+//use Laravel\Sanctum\HasApiTokens;
 use App\Filters\QueryFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Laratrust\Traits\LaratrustUserTrait;
-
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use LaratrustUserTrait;
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
     use TwoFactorAuthenticatable;
 
     /**
@@ -54,10 +56,26 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-
-    public function setPasswordAttribute($password)
+    public function authAcessToken()
     {
-        $this->attributes['password'] = Hash::make($password);
+        return $this->hasMany('\AppModels\OauthAccessToken');
+    }
+
+    public function saveUser($request): self
+    {
+        $this->name = $request->name;
+        $this->email = $request->email;
+        $this->password = Hash::make($request->password);
+        $this->save();
+
+        return $this;
+    }
+
+    public function logout(): self
+    {
+        auth()->user()->token()->revoke();
+
+        return $this;
     }
 
     public function scopeFilter(Builder $builder, QueryFilter $filter)
