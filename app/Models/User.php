@@ -83,4 +83,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $filter->apply($builder);
     }
 
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = Hash::make($password);
+    }
+
 }

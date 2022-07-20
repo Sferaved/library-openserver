@@ -25,6 +25,10 @@ return new class extends Migration
      */
     public function down()
     {
-
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn(
+                'facebook_id'
+            );
+        });
     }
 };

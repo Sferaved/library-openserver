@@ -152,7 +152,7 @@ Route::get('/vue/categories/all', [CategoryVueController::class, 'index']);
 Route::get('/booksv', function () {
     return view('book.booksv');
 })->name('bv');
-Route::get('/vue/books/delete/{id}', [BookVueController::class, 'destroy']);
+Route::get('/vue/books/delete/{id}', [BookVueController::class, 'destroy'])->middleware('role:superadministrator');
 Route::get('/vue/books/{id}', [BookVueController::class, 'update'])->name('update-submit-bv');
 Route::post('/vue/books/{id}', [BookVueController::class, 'updateSubmit'])
     ->middleware('role:superadministrator')
@@ -171,9 +171,9 @@ Route::get('/usersv', function () {
     return view('usr.usersv');
 })->name('uv');
 
-Route::get('/vue/users/all', [UserVueController::class, 'index'])->name('usersv');
-Route::get('/vue/users/delete/{id}', [UserVueController::class, 'destroy']);
-Route::get('/vue/users/{id}', [UserVueController::class, 'update'])->name('update-submit-v');
+Route::get('/vue/users/all', [UserVueController::class, 'index'])->name('usersv')->middleware('role:superadministrator');
+Route::get('/vue/users/delete/{id}', [UserVueController::class, 'destroy'])->middleware('role:superadministrator');
+Route::get('/vue/users/{id}', [UserVueController::class, 'update'])->name('update-submit-v')->middleware('role:superadministrator');
 Route::post('/vue/users/{id}', [UserVueController::class, 'updateSubmit'])
     ->middleware('role:superadministrator')
     ->name('update-submit-v');
