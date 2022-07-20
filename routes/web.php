@@ -40,7 +40,7 @@ Route::name('user.')->group(function () {
         return view('/auth/login');
     })->name('login');
 
-    Route::post('auth/login', [LoginController::class, 'login']);
+    Route::post('/auth/login/vue', [LoginController::class, 'login']);
 
     Route::get('/logout', function () {
         Auth::logout();
