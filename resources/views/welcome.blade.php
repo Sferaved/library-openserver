@@ -1,11 +1,12 @@
+
+
 @extends('layouts.app')
 
 @section('title-block')
     Welcome
 @endsection
-
+Home
 @section('content')
-
 
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
