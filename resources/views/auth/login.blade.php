@@ -3,7 +3,7 @@
 @section('title-block')
     Login
 @endsection
-
+Login
 @section('content')
 
 

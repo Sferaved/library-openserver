@@ -3,13 +3,8 @@
 @section('title-block')
     Private
 @endsection
-
+Private page
 @section('content')
-    <div class="container">
-        <div class="row col-12">
-            <h1>Private page</h1>
-        </div>
-    </div>
 
     <div id="app">
         <privat-component></privat-component>
