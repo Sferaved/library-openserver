@@ -84,7 +84,7 @@ class FunctCest
             'cover' => 'images/books/book.jpg'
         ]);
         $I->dontSeeResponseCodeIs(200);
-     }
+    }
 
     public function seeApiBooksCreat(FunctionalTester $I)
     {

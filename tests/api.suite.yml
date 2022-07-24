@@ -1,0 +1,12 @@
+actor: ApiTester
+
+modules:
+    enabled:
+      - REST:
+           url: http://library/api
+           depends: PhpBrowser
+           part: Json
+      - \Helper\Api
+
+step_decorators:
+  - \Codeception\Step\AsJson
